@@ -85,12 +85,7 @@ end
 
 wezterm.on("format-tab-title", tab.FormatTabTitle)
 wezterm.on("update-status", function(window, pane)
-	-- Each element holds the text for a cell in a "powerline" style << fade
 	local cells = {}
-
-	-- Figure out the cwd and host of the current pane.
-	-- This will pick up the hostname for the remote host if your
-	-- shell is using OSC 7 on the remote host.
 	local cwd_uri = pane:get_current_working_dir()
 	if cwd_uri then
 		local cwd = ""
@@ -115,7 +110,6 @@ wezterm.on("update-status", function(window, pane)
 				end)
 			end
 		end
-
 		-- Remove the domain name portion of the hostname
 		local dot = hostname:find("[.]")
 		if dot then
@@ -132,20 +126,11 @@ wezterm.on("update-status", function(window, pane)
 	-- I like my date/time in this style: "Wed Mar 3 08:14"
 	local date = wezterm.strftime("%a %b %-d %H:%M")
 	table.insert(cells, date)
-
 	-- An entry for each battery (typically 0 or 1 battery)
 	for _, b in ipairs(wezterm.battery_info()) do
 		table.insert(cells, string.format("%.0f%%", b.state_of_charge * 100))
 	end
-
-	-- The filled in variant of the < symbol
-	local SOLID_LEFT_ARROW = utf8.char(0xe0b2)
-
-	-- Color palette for the backgrounds of each cell
-
-	-- Foreground color for the text across the fade
 	local text_fg = "#7ba2f7"
-
 	-- The elements to be formatted
 	local elements = {}
 	-- How many cells have been formatted
@@ -153,10 +138,8 @@ wezterm.on("update-status", function(window, pane)
 
 	-- Translate a cell into elements
 	local function push(text, is_last)
-		local cell_no = num_cells + 1
 		table.insert(elements, { Foreground = { Color = text_fg } })
-		table.insert(elements, { Text = " " .. text .. " " })
-		num_cells = num_cells + 1
+		table.insert(elements, { Text = " " .. text .. " " .. "|" })
 	end
 
 	while #cells > 0 do
