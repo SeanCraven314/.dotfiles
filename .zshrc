@@ -8,8 +8,8 @@ export SHELL="zsh"
 export EDITOR="nvim"
 
 
-export "$(cat $HOME/secret.env | xargs)"
-export "$(cat $HOME/.env | xargs)"
+source "$HOME/secret.env"
+source "$HOME/.env"
 
 
 plugins=(git)
@@ -25,7 +25,6 @@ alias ut="python -m unittest discover -p 'test_*.py' -s test"
 alias gg="lazygit"
 alias nt="cargo nextest run"
 alias dc="docker compose"
-export VPN="$HOME/openvpn_sean_craven.ovpn"
 
 
 eval "$(starship init zsh)"
