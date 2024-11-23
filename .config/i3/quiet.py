@@ -1,4 +1,3 @@
-#!/home/sean/.local/bin/uv run
 # /// script
 # dependencies = [
 #   "i3ipc",

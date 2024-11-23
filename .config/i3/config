@@ -203,7 +203,7 @@ bindsym $mod+r mode "resize"
 ### Display layout
 
 bindsym $alt-mod+l exec --no-startup-id "i3lock -i ~/Pictures/night.png"
-bindsym $alt-mod+z exec --no-startup-id "~/.config/i3/quiet.py"
+bindsym $alt-mod+z exec --no-startup-id "uv run ~/.config/i3/quiet.py"
 
 gaps inner 4 
 gaps outer 4
