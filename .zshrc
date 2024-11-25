@@ -14,6 +14,7 @@ source "$HOME/.env"
 
 plugins=(git)
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ./kube.sh
 
 
 
@@ -21,16 +22,19 @@ ZSH_THEME=""
 
 alias FM="cd ~/Documents/ms_proj"
 alias pa="source ./.venv/bin/activate"
-alias ut="python -m unittest discover -p 'test_*.py' -s test"
+alias ut="uv run python -m unittest discover -p 'test_*.py' -s test"
 alias gg="lazygit"
 alias nt="cargo nextest run"
 alias dc="docker compose"
+alias dctx="docker context"
+alias k="kubectl"
 
 
 eval "$(starship init zsh)"
 
 
 export FZF_COMPLETION_OPTS='--border --info=inline'
+
 
 _fzf_compgen_path() {
   fd --hidden --follow --exclude ".git" . "$1"
