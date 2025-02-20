@@ -1,6 +1,7 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
 local tab = require("tab")
+wezterm.enable_wayland = false
 
 local direction_keys = {
 	Left = "h",
