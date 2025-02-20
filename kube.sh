@@ -1,6 +1,7 @@
 kgl() {
   pod=$(kg pods "$@")
   if [[ -n $pod ]]; then
+    echo "Pod: $pod"
     kubectl logs "$pod"
   else
     echo "No pod selected."
@@ -12,7 +13,18 @@ kd() {
   first_arg=$1
   item=$(kg "$@")
   if [[ -n $item ]]; then
+    echo "$first_arg: $item"
     kubectl describe $first_arg $item
+  else
+    echo "No pod selected."
+  fi
+}
+kde() {
+  first_arg=$1
+  item=$(kg "$@")
+  if [[ -n $item ]]; then
+    echo "$first_arg: $item"
+    kubectl delete $first_arg $item
   else
     echo "No pod selected."
   fi
@@ -31,5 +43,4 @@ kg() {
     item=$items
   fi
   echo "$item"
-
 }

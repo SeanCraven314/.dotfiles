@@ -44,7 +44,7 @@ config.window_background_opacity = 0.9
 config.use_fancy_tab_bar = false
 config.status_update_interval = 1000
 config.tab_bar_at_bottom = false
-config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 1000 }
+config.leader = { key = "Super", timeout_milliseconds = 1000 }
 config.color_scheme = "Tokyo Night Storm"
 
 -- This is where you actually apply your config choices

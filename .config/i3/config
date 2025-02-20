@@ -36,7 +36,7 @@ client.background        $base
 
 bar {
   position top
-  font pango: FiraCodeNerdFontMono
+  font pango: FiraCodeNerdFontMono 16
     colors {
     background         $base
     statusline         $text
@@ -209,15 +209,15 @@ gaps inner 4
 gaps outer 4
 
 assign [class="org.wezfurlong.wezterm"] $ws1
-assign [class="firefox"] $ws2
+assign [class="Google-chrome" instance="google-chrome"] $ws2
 assign [class="org.mozilla.thunderbird"] $ws4
 
 exec_always --no-startup-id bash ~/.config/i3/keyboard.sh
 exec_always --no-startup-id feh --bg-max ~/Pictures/night.png
+exec_always --no-startup-id not-shit-randr
 for_window [class="^.*"] border pixel 5
 
 
 ## Default startupbehaviour
 exec --no-startup-id wezterm
-exec --no-startup-id firefox
-exec --no-startup-id picom
+exec --no-startup-id google-chrome-stable

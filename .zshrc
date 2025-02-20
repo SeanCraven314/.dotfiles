@@ -13,8 +13,8 @@ source "$HOME/.env"
 
 
 plugins=(git)
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ./kube.sh
+source "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$HOME/kube.sh"
 
 
 
@@ -27,10 +27,18 @@ alias gg="lazygit"
 alias nt="cargo nextest run"
 alias dc="docker compose"
 alias dctx="docker context"
+alias dclb="docker compose --context lbetty"
+alias dclr="docker compose --context lroxy"
+alias dcb="docker compose --context betty"
+alias dcr="docker compose --context roxy"
+alias clip="xclip -sel clip"
+alias setclip="xclip -selection c"
 alias k="kubectl"
+alias hdp="helm upgrade dev $HOME/aair-infrastructure/helm_charts/platform --values=$HOME/aair-infrastructure/helm_charts/platform/values-dev.yml"
 
 
 eval "$(starship init zsh)"
+eval "$(zoxide init zsh --cmd cd)"
 
 
 export FZF_COMPLETION_OPTS='--border --info=inline'
