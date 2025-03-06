@@ -35,6 +35,9 @@ alias clip="xclip -sel clip"
 alias setclip="xclip -selection c"
 alias k="kubectl"
 alias hdp="helm upgrade dev $HOME/aair-infrastructure/helm_charts/platform --values=$HOME/aair-infrastructure/helm_charts/platform/values-dev.yml"
+alias tf="terraform"
+alias pre-commit="uv run python $HOME/pre-commit-4.1.0.pyz"
+
 
 
 eval "$(starship init zsh)"
