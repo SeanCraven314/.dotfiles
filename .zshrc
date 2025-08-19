@@ -31,7 +31,7 @@ alias dclb="docker compose --context lbetty"
 alias dclr="docker compose --context lroxy"
 alias dcb="docker compose --context betty"
 alias dcr="docker compose --context roxy"
-alias clip="xclip -sel clip"
+alias clip="wl-copy"
 alias setclip="xclip -selection c"
 alias k="kubectl"
 alias hdp="helm upgrade dev $HOME/aair-infrastructure/helm_charts/platform --values=$HOME/aair-infrastructure/helm_charts/platform/values-dev.yml"
@@ -67,6 +67,24 @@ _fzf_comprun() {
     *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
   esac
 }
+# zsh parameter completion for the dotnet CLI
+
+_dotnet_zsh_complete()
+{
+  local completions=("$(dotnet complete "$words")")
+
+  # If the completion list is empty, just continue with filename selection
+  if [ -z "$completions" ]
+  then
+    _arguments '*::arguments: _normal'
+    return
+  fi
+
+  # This is not a variable assignment, don't remove spaces!
+  _values = "${(ps:\n:)completions}"
+}
+
+compdef _dotnet_zsh_complete dotnet
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -74,3 +92,6 @@ export NVM_DIR="$HOME/.nvm"
 source <(fzf --zsh)
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 . "/home/sean/.deno/env"
+
+
+fh check

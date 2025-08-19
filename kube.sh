@@ -1,3 +1,22 @@
+kgc() {
+  items=$(kubectl get pod | awk 'NR>1 {print $1,$3}')
+  if [ $1 ]; then
+    items=$(echo "$items" | grep $1)
+  fi
+  line_count=$(echo "$items" | wc -l)
+  if [ "$line_count" -gt 1 ]; then
+    item=$(echo "$items" | fzf)
+  else;
+    item=$items
+  fi
+  echo "$item"
+}
+kxc() {
+  first_arg=$1
+  shift
+  items=$(kubectl get $first_arg | grep -i $1 | awk '{print $1}' | xargs kubectl delete $first_arg )
+}
+
 kgl() {
   pod=$(kg pods "$@")
   if [[ -n $pod ]]; then
@@ -19,7 +38,7 @@ kd() {
     echo "No pod selected."
   fi
 }
-kde() {
+kx() {
   first_arg=$1
   item=$(kg "$@")
   if [[ -n $item ]]; then
@@ -32,7 +51,7 @@ kde() {
 kg() {
   first_arg=$1
   shift
-  items=$(kubectl get $first_arg | grep -v NAME | awk '{print $1}')
+  items=$(kubectl get $first_arg | awk 'NR>1 {print $1}')
   if [ $1 ]; then
     items=$(echo "$items" | grep $1)
   fi
